@@ -1,17 +1,30 @@
-<ng-container *ngIf="loaderService.isLoading">
+<ng-container *ngIf="error">
   <ng-template
-    [ngTemplateOutlet]="loaderTemplate || defaultLoaderTemplate"
+    [ngTemplateOutlet]="errorTemplate || defaultErrorTemplate"
   ></ng-template>
 </ng-container>
+<ng-container *ngIf="!error">
+  <ng-container *ngIf="loaderService.isLoading">
+    <ng-template
+      [ngTemplateOutlet]="loaderTemplate || defaultLoaderTemplate"
+    ></ng-template>
+  </ng-container>
 
-<ng-container *ngIf="!loaderService.isLoading">
-  <ng-template
-    [ngTemplateOutlet]="nextPageTemplate || defaultNextPageTemplate"
-  ></ng-template>
+  <ng-container *ngIf="!loaderService.isLoading">
+    <ng-content></ng-content>
+
+    <ng-template
+      [ngTemplateOutlet]="nextPageTemplate || defaultNextPageTemplate"
+    ></ng-template>
+  </ng-container>
 </ng-container>
 
 <ng-template #defaultNextPageTemplate>
   <div appNextPage>next</div>
+</ng-template>
+
+<ng-template #defaultErrorTemplate>
+  Error occured
 </ng-template>
 
 <ng-template #defaultLoaderTemplate>

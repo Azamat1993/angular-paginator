@@ -9,9 +9,9 @@ export class AppComponent {
   title = "app";
 
   sendRequest = () => {
-    return new Promise(resolve => {
+    return new Promise((resolve, reject) => {
       setTimeout(() => {
-        resolve();
+        reject("Some error");
       }, 1000);
     });
   };

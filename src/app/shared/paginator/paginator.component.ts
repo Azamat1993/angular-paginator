@@ -1,6 +1,9 @@
 import { Component, OnInit, Input, TemplateRef } from "@angular/core";
 import { LoaderService } from "../../core/loader.service";
 
+const DEFAULT_REQUEST_FN = (pageNumber: number) => Promise.resolve(null);
+const DEFAULT_CURRENT_PAGE = 0;
+
 @Component({
   selector: "app-paginator",
   templateUrl: "./paginator.component.html",
@@ -8,9 +11,12 @@ import { LoaderService } from "../../core/loader.service";
 })
 export class PaginatorComponent implements OnInit {
   @Input() public loaderTemplate: TemplateRef<any>;
+  @Input() public errorTemplate: TemplateRef<any>;
 
-  @Input() private currentPage = 0;
-  @Input() private requestFn = (pageNumber: number) => Promise.resolve(null);
+  @Input() private currentPage = DEFAULT_CURRENT_PAGE;
+  @Input() private requestFn = DEFAULT_REQUEST_FN;
+
+  public error: any = null;
 
   constructor(public loaderService: LoaderService) {}
 
@@ -29,6 +35,10 @@ export class PaginatorComponent implements OnInit {
     this.requestFn(nextPage)
       .then(_ => {
         this.currentPage = nextPage;
+      })
+      .catch(err => {
+        console.log(err);
+        this.error = err;
       })
       .finally(() => {
         this.loaderService.setLoading(false);
