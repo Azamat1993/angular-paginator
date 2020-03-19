@@ -1,25 +1,33 @@
+<!-- ERROR START -->
 <ng-container *ngIf="error">
   <ng-template
     [ngTemplateOutlet]="errorTemplate || defaultErrorTemplate"
   ></ng-template>
 </ng-container>
+<!-- ERROR END -->
+
 <ng-container *ngIf="!error">
+  <!-- LOADER START -->
   <ng-container *ngIf="loaderService.isLoading">
     <ng-template
       [ngTemplateOutlet]="loaderTemplate || defaultLoaderTemplate"
     ></ng-template>
   </ng-container>
+  <!-- LOADER END -->
 
   <ng-container *ngIf="!loaderService.isLoading">
+    <!-- CONTENT START -->
     <ng-content></ng-content>
+    <!-- CONTENT END -->
+
+    <!-- CONTROLS START -->
     <ng-template
       [ngTemplateOutlet]="nextPageTemplate || defaultNextPageTemplate"
     ></ng-template>
-
     <ng-template
       [ngTemplateOutlet]="prevPageTemplate || defaultPrevPageTemplate"
-    >
-    </ng-template>
+    ></ng-template>
+    <!-- CONTROLS END -->
   </ng-container>
 </ng-container>
 

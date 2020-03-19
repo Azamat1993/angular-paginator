@@ -12,8 +12,11 @@ const DEFAULT_CURRENT_PAGE = 0;
 export class PaginatorComponent implements OnInit {
   @Input() public loaderTemplate: TemplateRef<any>;
   @Input() public errorTemplate: TemplateRef<any>;
+  @Input() public nextPageTemplate: TemplateRef<any>;
+  @Input() public prevPageTemplate: TemplateRef<any>;
 
-  @Input() private currentPage = DEFAULT_CURRENT_PAGE;
+  @Input() public currentPage = DEFAULT_CURRENT_PAGE;
+
   @Input() private requestFn = DEFAULT_REQUEST_FN;
 
   public error: any = null;
