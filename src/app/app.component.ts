@@ -11,10 +11,11 @@ export class AppComponent {
   sendRequest = () => {
     return new Promise((resolve, reject) => {
       setTimeout(() => {
-        resolve("Some error");
+        resolve({
+          items: [],
+          totalPages: 12
+        });
       }, 1000);
-    }).then(res => {
-      console.log(res);
     });
   };
 }
