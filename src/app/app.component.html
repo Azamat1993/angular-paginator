@@ -1,6 +1,8 @@
-<div
-  appPaginator
+<app-paginator
   [requestFn]="sendRequest"
->
-  <div appNextPage>next</div>
-</div>
+  [loaderTemplate]="loaderTemplate"
+></app-paginator>
+
+<ng-template #loaderTemplate>
+  Loading
+</ng-template>

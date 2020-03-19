@@ -1,16 +1,14 @@
-import { Injectable, Subject, ReplaySubject } from "@angular/core";
+import { Injectable } from "@angular/core";
 
-@Injectable()
+@Injectable({
+  provideIn: "root"
+})
 export class LoaderService {
-  private _isLoading$: Subject<boolean> = new ReplaySubject(1);
+  public isLoading = false;
 
   constructor() {}
 
-  public isLoading = () => {
-    return this._isLoading$.asObservable();
-  };
-
   public setLoading = (loading: boolean) => {
-    this._isLoading$.next(loading);
+    this.isLoading = loading;
   };
 }

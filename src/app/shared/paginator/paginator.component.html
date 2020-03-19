@@ -1,0 +1,19 @@
+<ng-container *ngIf="loaderService.isLoading">
+  <ng-template
+    [ngTemplateOutlet]="loaderTemplate || defaultLoaderTemplate"
+  ></ng-template>
+</ng-container>
+
+<ng-container *ngIf="!loaderService.isLoading">
+  <ng-template
+    [ngTemplateOutlet]="nextPageTemplate || defaultNextPageTemplate"
+  ></ng-template>
+</ng-container>
+
+<ng-template #defaultNextPageTemplate>
+  <div appNextPage>next</div>
+</ng-template>
+
+<ng-template #defaultLoaderTemplate>
+  Loading......
+</ng-template>

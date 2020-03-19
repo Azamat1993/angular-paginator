@@ -1,11 +1,11 @@
 import { Directive, HostListener } from "@angular/core";
-import { PaginatorDirective } from "./paginator.directive";
+import { PaginatorComponent } from "./paginator.component";
 
 @Directive({
   selector: "[appNextPage]"
 })
 export class NextPageDirective {
-  constructor(private paginator: PaginatorDirective) {}
+  constructor(private paginator: PaginatorComponent) {}
 
   @HostListener("click")
   public onClick() {

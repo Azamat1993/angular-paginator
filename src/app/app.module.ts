@@ -2,13 +2,16 @@ import { BrowserModule } from "@angular/platform-browser";
 import { NgModule } from "@angular/core";
 
 import { AppComponent } from "./app.component";
-import { PaginatorDirective } from "./shared/paginator.directive";
-import { NextPageDirective } from "./shared/next-page.directive";
+import { PaginatorComponent } from "./shared/paginator/paginator.component";
+
+import { NextPageDirective } from "./shared/paginator/next-page.directive";
+
+import { LoaderService } from "./core/loader.service";
 
 @NgModule({
-  declarations: [AppComponent, PaginatorDirective, NextPageDirective],
+  declarations: [AppComponent, NextPageDirective, PaginatorComponent],
   imports: [BrowserModule],
-  providers: [],
+  providers: [LoaderService],
   bootstrap: [AppComponent]
 })
 export class AppModule {}

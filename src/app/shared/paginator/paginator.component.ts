@@ -1,14 +1,18 @@
-import { Directive, Input } from "@angular/core";
-import { LoaderService } from "../core/loader.service";
+import { Component, OnInit, Input, TemplateRef } from "@angular/core";
+import { LoaderService } from "../../core/loader.service";
 
-@Directive({
-  selector: "[appPaginator]"
+@Component({
+  selector: "app-paginator",
+  templateUrl: "./paginator.component.html",
+  styleUrls: ["./paginator.component.css"]
 })
-export class PaginatorDirective {
+export class PaginatorComponent implements OnInit {
+  @Input() public loaderTemplate: TemplateRef<any>;
+
   @Input() private currentPage = 0;
   @Input() private requestFn = (pageNumber: number) => Promise.resolve(null);
 
-  constructor(private loaderService: LoaderService) {}
+  constructor(public loaderService: LoaderService) {}
 
   public nextPage() {
     this.sendRequest(this.currentPage + 1);
