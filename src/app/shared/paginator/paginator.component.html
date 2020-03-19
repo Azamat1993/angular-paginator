@@ -12,15 +12,23 @@
 
   <ng-container *ngIf="!loaderService.isLoading">
     <ng-content></ng-content>
-
     <ng-template
       [ngTemplateOutlet]="nextPageTemplate || defaultNextPageTemplate"
     ></ng-template>
+
+    <ng-template
+      [ngTemplateOutlet]="prevPageTemplate || defaultPrevPageTemplate"
+    >
+    </ng-template>
   </ng-container>
 </ng-container>
 
 <ng-template #defaultNextPageTemplate>
   <div appNextPage>next</div>
+</ng-template>
+
+<ng-template #defaultPrevPageTemplate>
+  <div appPrevPage>prev</div>
 </ng-template>
 
 <ng-template #defaultErrorTemplate>

@@ -7,9 +7,15 @@ import { PaginatorComponent } from "./shared/paginator/paginator.component";
 import { NextPageDirective } from "./shared/paginator/next-page.directive";
 
 import { LoaderService } from "./core/loader.service";
+import { PrevPageDirective } from "./shared/paginator/prev-page.directive";
 
 @NgModule({
-  declarations: [AppComponent, NextPageDirective, PaginatorComponent],
+  declarations: [
+    AppComponent,
+    NextPageDirective,
+    PaginatorComponent,
+    PrevPageDirective
+  ],
   imports: [BrowserModule],
   providers: [LoaderService],
   bootstrap: [AppComponent]

@@ -11,8 +11,10 @@ export class AppComponent {
   sendRequest = () => {
     return new Promise((resolve, reject) => {
       setTimeout(() => {
-        reject("Some error");
+        resolve("Some error");
       }, 1000);
+    }).then(res => {
+      console.log(res);
     });
   };
 }

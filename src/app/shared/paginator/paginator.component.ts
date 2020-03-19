@@ -37,7 +37,6 @@ export class PaginatorComponent implements OnInit {
         this.currentPage = nextPage;
       })
       .catch(err => {
-        console.log(err);
         this.error = err;
       })
       .finally(() => {
