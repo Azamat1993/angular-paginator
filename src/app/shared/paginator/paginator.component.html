@@ -16,9 +16,19 @@
   <!-- LOADER END -->
 
   <ng-container *ngIf="!loaderService.isLoading">
-    <!-- CONTENT START -->
-    <ng-content></ng-content>
-    <!-- CONTENT END -->
+    <!-- EMPTY START -->
+    <ng-container *ngIf="totalPages === 0">
+      <ng-template
+        [ngTemplateOutlet]="emptyTemplate || defaultEmptyTemplate"
+      ></ng-template>
+    </ng-container>
+    <!-- EMPTY END -->
+
+    <ng-container *ngIf="totalPages > 0">
+      <!-- CONTENT START -->
+      <ng-content></ng-content>
+      <!-- CONTENT END -->
+    </ng-container>
 
     <!-- CONTROLS START -->
     <ng-template
@@ -33,6 +43,10 @@
 
 <ng-template #defaultNextPageTemplate>
   <div appNextPage>next</div>
+</ng-template>
+
+<ng-template #defaultEmptyTemplate>
+  Empty...
 </ng-template>
 
 <ng-template #defaultPrevPageTemplate>

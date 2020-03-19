@@ -24,17 +24,21 @@ export class PaginatorComponent {
   @Input() public errorTemplate: TemplateRef<any>;
   @Input() public nextPageTemplate: TemplateRef<any>;
   @Input() public prevPageTemplate: TemplateRef<any>;
+  @Input() public emptyTemplate: TemplateRef<any>;
 
   @Input() public currentPage = DEFAULT_CURRENT_PAGE;
 
   @Input() private requestFn = DEFAULT_REQUEST_FN;
 
   public error: any = null;
+  public totalPages: number = 10;
 
   constructor(public loaderService: LoaderService) {}
 
   public nextPage() {
-    this.sendRequest(++this.currentPage);
+    if (this.currentPage < this.totalPages) {
+      this.sendRequest(++this.currentPage);
+    }
   }
 
   public prevPage() {
@@ -61,12 +65,12 @@ export class PaginatorComponent {
   };
 
   private handleResponse = (response: IPaginatorResponse) => {
-    console.log("handling response");
+    this.totalPages = response.totalPages;
   };
 
   private checkResponse = (response: IPaginatorResponse) => {
-    if (!response || !response.totalPages) {
-      throw "Incorrect response";
+    if (!response || response.totalPages === undefined) {
+      throw "Incorrect response " + response;
     }
     return response;
   };

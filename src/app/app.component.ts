@@ -13,7 +13,7 @@ export class AppComponent {
       setTimeout(() => {
         resolve({
           items: [],
-          totalPages: 12
+          totalPages: 0
         });
       }, 1000);
     });
