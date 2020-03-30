@@ -19,7 +19,7 @@ const DEFAULT_CURRENT_PAGE = 0;
   templateUrl: "./paginator.component.html",
   styleUrls: ["./paginator.component.css"]
 })
-export class PaginatorComponent {
+export class PaginatorComponent implements OnInit {
   @Input() public loaderTemplate: TemplateRef<any>;
   @Input() public errorTemplate: TemplateRef<any>;
   @Input() public nextPageTemplate: TemplateRef<any>;
@@ -34,6 +34,10 @@ export class PaginatorComponent {
   public totalPages: number = 10;
 
   constructor(public loaderService: LoaderService) {}
+
+  public ngOnInit() {
+    this.sendRequest(DEFAULT_CURRENT_PAGE);
+  }
 
   public nextPage() {
     if (this.currentPage < this.totalPages) {

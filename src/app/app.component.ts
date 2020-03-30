@@ -12,8 +12,10 @@ export class AppComponent {
     return new Promise((resolve, reject) => {
       setTimeout(() => {
         resolve({
-          items: [],
-          totalPages: 0
+          items: [{
+            asd: 'asd'
+          }],
+          totalPages: 12
         });
       }, 1000);
     });
