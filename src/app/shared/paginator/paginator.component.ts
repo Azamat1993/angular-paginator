@@ -1,12 +1,15 @@
 import { Component, OnInit, Input, TemplateRef } from "@angular/core";
+import { Observable, from } from "rxjs";
+
 import { LoaderService } from "../../core/loader.service";
+import { request } from "http";
 
 interface IPaginatorResponse {
   items: Array<any>;
   totalPages: number;
 }
 
-const DEFAULT_REQUEST_FN = (pageNumber: number): Promise<IPaginatorResponse> =>
+const DEFAULT_REQUEST_FN = (pageNumber: number): Promise<IPaginatorResponse> | Observable<IPaginatorResponse> =>
   Promise.resolve({
     items: [],
     totalPages: 0
@@ -53,11 +56,26 @@ export class PaginatorComponent implements OnInit {
 
   protected sendRequest(nextPage: number) {
     this.initRequest();
-    this.requestFn(nextPage)
+    this.makeRequest(nextPage)
       .then(this.checkResponse)
       .then(this.handleResponse)
       .catch(this.handleError)
       .finally(this.handleFinally);
+  }
+
+  protected makeRequest(nextPage: number): Promise<IPaginatorResponse> {
+    let requestObj = this.requestFn(nextPage);
+
+    switch (requestObj.constructor) {
+      case Observable:
+        requestObj = (requestObj as Observable<IPaginatorResponse>).toPromise();
+      case Promise:
+        break;
+      default:
+        throw new Error(`requestFn must return either Observable or Promise, returned: ${requestObj.constructor.name}`);
+    }
+
+    return requestObj as Promise<IPaginatorResponse>;
   }
 
   protected initRequest = () => {
