@@ -1,5 +1,5 @@
 import { Component, OnInit, Input, TemplateRef } from "@angular/core";
-import { Observable, from } from "rxjs";
+import { Observable } from "rxjs";
 
 import { LoaderService } from "../../core/loader.service";
 import { request } from "http";
@@ -20,7 +20,10 @@ const DEFAULT_CURRENT_PAGE = 0;
 @Component({
   selector: "app-paginator",
   templateUrl: "./paginator.component.html",
-  styleUrls: ["./paginator.component.css"]
+  styleUrls: ["./paginator.component.css"],
+  providers: [
+    LoaderService
+  ]
 })
 export class PaginatorComponent implements OnInit {
   @Input() public loaderTemplate: TemplateRef<any>;
