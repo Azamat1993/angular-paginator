@@ -51,8 +51,8 @@ export class PaginatorComponent implements OnInit {
     }
   }
 
-  private sendRequest(nextPage: number) {
-    this.loaderService.setLoading(true);
+  protected sendRequest(nextPage: number) {
+    this.initRequest();
     this.requestFn(nextPage)
       .then(this.checkResponse)
       .then(this.handleResponse)
@@ -60,19 +60,23 @@ export class PaginatorComponent implements OnInit {
       .finally(this.handleFinally);
   }
 
-  private handleError = err => {
+  protected initRequest = () => {
+    this.loaderService.setLoading(true);
+  }
+
+  protected handleError = err => {
     this.error = err;
   };
 
-  private handleFinally = () => {
+  protected handleFinally = () => {
     this.loaderService.setLoading(false);
   };
 
-  private handleResponse = (response: IPaginatorResponse) => {
+  protected handleResponse = (response: IPaginatorResponse) => {
     this.totalPages = response.totalPages;
   };
 
-  private checkResponse = (response: IPaginatorResponse) => {
+  protected checkResponse = (response: IPaginatorResponse) => {
     if (!response || response.totalPages === undefined) {
       throw "Incorrect response " + response;
     }
